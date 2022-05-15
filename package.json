@@ -1,0 +1,13 @@
+{
+  "name": "com.heartfield-productions.roputseug",
+  "version": "1.0.0",
+  "displayName": "Roputseug Translator",
+  "description": "Translate Portuguese to Roputseug",
+  "author": {
+    "name": "Heartfield Productions"
+  },
+  "type": "Translator",
+  "dependencies": {
+    "com.heartfield-productions.core": "1.0.0"
+  }
+}
