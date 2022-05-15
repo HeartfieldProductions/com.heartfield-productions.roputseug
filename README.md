@@ -1,2 +1,2 @@
-# com.heartfield-productions.roputseug
+# Roputseug Translator
  Translate Portuguese to Roputseug
