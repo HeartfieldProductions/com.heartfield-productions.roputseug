@@ -1,32 +1,62 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Heartfield.Roputseug;
 
-namespace Roputseug
+namespace HeartfieldEditor.Roputseug
 {
     [CustomEditor(typeof(RoputseugDictionary))]
-    public class RoputseugEditor : Editor
+    sealed class RoputseugEditor : Editor
     {
-
         string output;
+        bool showResult;
+
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
+            var currTarget = (RoputseugDictionary)target;
 
-            RoputseugDictionary currTarget = (RoputseugDictionary)target;
+            EditorGUILayout.Separator();
 
+            EditorGUI.BeginChangeCheck();
             currTarget.inputText = EditorGUILayout.TextArea(currTarget.inputText);
-
-            if (currTarget.inputText == string.Empty)
-                return;
-           
-            if (GUILayout.Button("Separate Syllables"))
+            if (EditorGUI.EndChangeCheck() && showResult)
             {
-                output = RoputseugDictionary.Translate(currTarget.inputText);
+                output = string.Empty;
+                showResult = false;
             }
 
-            EditorGUILayout.TextArea(output);
+            EditorGUILayout.Separator();
+
+            EditorGUI.BeginDisabledGroup(currTarget.inputText.Length <= 2);
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            if (GUILayout.Button("Separate Syllables"))
+            {
+                output = RoputseugDictionary.SeparateSyllables(currTarget.inputText);
+                showResult = true;
+            }
+
+            if (GUILayout.Button("Translate"))
+            {
+                output = RoputseugDictionary.Translate(currTarget.inputText);
+                showResult = true;
+            }
+
+            if (GUILayout.Button("Translate and Separate Syllables"))
+            {
+                output = RoputseugDictionary.TranslateAndSeparateSyllables(currTarget.inputText);
+                showResult = true;
+            }
+            EditorGUILayout.EndHorizontal();
+            EditorGUI.EndDisabledGroup();
+
+            EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+            var style = new GUIStyle(EditorStyles.label)
+            {
+                richText = true
+            };
+            
+            EditorGUILayout.LabelField("Output", $"<b>{output}</b>", style);
+            EditorGUILayout.EndVertical();
         }
     }
 }
