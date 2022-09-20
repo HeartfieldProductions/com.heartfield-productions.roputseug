@@ -1,15 +1,13 @@
 {
-    "name": "heartfield-productions.roputseug.editor",
-    "rootNamespace": "HeartfieldEditor.Roputseug",
-    "references": [
-        "GUID:6854113af7ec2e444a9b47517fa9b211"
-    ],
+    "name": "Heartfield.Roputseug",
+    "rootNamespace": "Heartfield.Roputseug",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": true,
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false
